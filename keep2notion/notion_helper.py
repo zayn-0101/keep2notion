@@ -108,7 +108,7 @@ class NotionHelper:
                     child.get("id")
                 )
             elif child["type"] == "embed" and child.get("embed").get("url"):
-                if child.get("embed").get("url").startswith("https://heatmap.malinkang.com/"):
+                if "heatmap" in child.get("embed").get("url"):
                     self.heatmap_block_id = child.get("id")
             # 如果子块有子块，递归调用函数
             if "has_children" in child and child["has_children"]:
@@ -174,11 +174,6 @@ class NotionHelper:
                 page_id = self.client.pages.create(
                     parent=parent, properties=properties, icon=get_icon(icon)
                 ).get("id")
-            if id == self.type_database_id:
-                self.append_blocks(
-                    block_id=page_id,
-                    children=[get_embed("https://heatmap.malinkang.com/")],
-                )
         else:
             page_id = response.get("results")[0].get("id")
         self.__cache[key] = page_id
@@ -257,7 +252,7 @@ class NotionHelper:
         return results
 
     def get_date_icon(self, date, type):
-        return f"https://notion-icon.malinkang.com/?type={type}&date={date.strftime('%Y-%m-%d')}"
+        return TARGET_ICON_URL
     
     def get_date_relation(self, properties, date):
         properties["年"] = get_relation(
@@ -292,5 +287,5 @@ class NotionHelper:
             # 检查子块的类型
             if child["type"] == "embed" and child.get("embed").get("url"):
                 url =  child.get("embed").get("url")
-                if url.startswith("https://heatmap.malinkang.com/"):
+                if "heatmap" in url:
                     return child.get("id")

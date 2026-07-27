@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="keep2notion",
-    version="0.1.3",
+    version="0.1.4",
     packages=find_packages(),
     install_requires=[
         "requests",
@@ -12,7 +12,7 @@ setup(
         "github-heatmap",
         "python-dotenv",
         "emoji",
-        "bson",
+        "pymongo>=4.17,<5",
     ],
     entry_points={
         "console_scripts": [

@@ -278,14 +278,8 @@ def add_to_notion(workout, end_time, icon, cover):
         "type": "database_id",
     }
     icon = utils.get_icon(icon) if icon else {"type":"emoji","emoji": "🏃"}
-    # 封面长图有限制
-    if cover and len(cover) <= 2000:
-        pass
-    else:
-        if cover:
-            cover = utils.upload_cover(cover)
-        else:
-            cover = "https://images.unsplash.com/photo-1547483238-f400e65ccd56?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    if not cover or len(cover) > 2000:
+        cover = "https://images.unsplash.com/photo-1547483238-f400e65ccd56?q=80&w=2970&auto=format&fit=crop"
     notion_helper.create_page(
         parent=parent, properties=properties, cover=utils.get_icon(cover), icon=icon
     )

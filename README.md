@@ -3,6 +3,13 @@
 
 本项目通过Github Action每天定时同步Keep跑步数据到Notion。
 
+## NotionHub 免费 Runner
+
+NotionHub 插件使用固定 tag `notionhub-free-v1.0.0` 运行本项目。免费
+Runner 只同步运动记录和基础热力图，直接访问 Keep 与 Notion，不请求
+NotionHub Worker。封面使用原始外链，热力图文件保存在用户自己的公开
+Runner 仓库。
+
 预览效果：https://www.notion.so/malinkang/7c556041c7fd4e21a6713673b6168fd4?pvs=4
 
 
@@ -28,4 +35,3 @@
 如果你觉得本项目帮助了你，请作者喝一杯咖啡，你的支持是作者最大的动力。本项目会持续更新。
 
 ![](./asset/WechatIMG27.jpg)
-
