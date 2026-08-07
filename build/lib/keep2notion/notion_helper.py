@@ -47,6 +47,7 @@ class NotionHelper:
         self.client = Client(auth=os.getenv("NOTION_TOKEN"), log_level=logging.ERROR)
         self.__cache = {}
         self.page_id = self.extract_page_id(os.getenv("NOTION_PAGE"))
+        self.heatmap_block_id = None
         self.search_database(self.page_id)
         for key in self.database_name_dict.keys():
             if os.getenv(key) != None and os.getenv(key) != "":
@@ -108,7 +109,8 @@ class NotionHelper:
                     child.get("id")
                 )
             elif child["type"] == "embed" and child.get("embed").get("url"):
-                if child.get("embed").get("url").startswith("https://heatmap.malinkang.com/"):
+                url = child.get("embed").get("url")
+                if any(k in url for k in ("heatmap", "OUT_FOLDER", "notionhub-artifacts")):
                     self.heatmap_block_id = child.get("id")
             # 如果子块有子块，递归调用函数
             if "has_children" in child and child["has_children"]:
@@ -291,6 +293,6 @@ class NotionHelper:
         for child in children:
             # 检查子块的类型
             if child["type"] == "embed" and child.get("embed").get("url"):
-                url =  child.get("embed").get("url")
-                if url.startswith("https://heatmap.malinkang.com/"):
+                url = child.get("embed").get("url")
+                if any(k in url for k in ("heatmap", "OUT_FOLDER", "notionhub-artifacts")):
                     return child.get("id")
