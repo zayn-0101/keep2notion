@@ -20,6 +20,9 @@ jobs:
         YEAR: ${{ vars.YEAR }}
         REF: ${{ github.ref }}
         REPOSITORY: ${{ github.repository }}
+        ARTIFACT_BRANCH: main
+        NOTIONHUB_ARTIFACT_ROOT: OUT_FOLDER
+        NOTIONHUB_ARTIFACT_PATH: OUT_FOLDER
     steps:
       - name: Checkout
         uses: actions/checkout@v3
